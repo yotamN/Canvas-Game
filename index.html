@@ -3,7 +3,7 @@
   <head>
     <title>Title</title>
     <style>
-      /* http://meyerweb.com/eric/tools/css/reset/ 
+      /* http://meyerweb.com/eric/tools/css/reset/
          v2.0 | 20110126
          License: none (public domain)
       */
@@ -16,8 +16,8 @@
       dl, dt, dd, ol, ul, li,
       fieldset, form, label, legend,
       table, caption, tbody, tfoot, thead, tr, th, td,
-      article, aside, canvas, details, embed, 
-      figure, figcaption, footer, header, hgroup, 
+      article, aside, canvas, details, embed,
+      figure, figcaption, footer, header, hgroup,
       menu, nav, output, ruby, section, summary,
       time, mark, audio, video {
       	margin: 0;
@@ -28,7 +28,7 @@
       	vertical-align: baseline;
       }
       /* HTML5 display-role reset for older browsers */
-      article, aside, details, figcaption, figure, 
+      article, aside, details, figcaption, figure,
       footer, header, hgroup, menu, nav, section {
       	display: block;
       }
@@ -62,17 +62,52 @@
     <meta charset="UTF-8" />
   </head>
   <body>
+    <noscript id="jsd" style="position: fixed; height: 100vh; width: 100vw; background-color: #111; color: #fff;">
+      Your javascript is disable.
+      this is a javascript game
+    </noscript>
+    <!-- Basic game files -->
     <script src="key.js"></script>
+    <script src="resources.class.js"></script>
+    <script src="howler.min.js"></script>
     <script src="Game.class.js"></script>
-    <script src="Object.class.js"></script>
+
+    <!-- Game objects -->
+    <script src="Object.class/Object.class.js"></script>
+    <script src="Object.class/Img.class.js"></script>
+    <script src="Object.class/Text.class.js"></script>
+    <script src="Object.class/Rect.class.js"></script>
+    <script src="Object.class/Sprite.class.js"></script>
+    <script src="Object.class/Pattern.class.js"></script>
+
+    <!-- Game Scripts -->
+    <script src="Game/enemy.js"></script>
+    <script src="Game/enemyExplode.js"></script>
+    <script src="Game/player.js"></script>
+    <script src="Game/playerBulls.js"></script>
+    <script src="Game/speedLine.js"></script>
+    <script src="Game/main.js"></script>
     <script>
-    
-      var FPS = 30;
-      
-      var Game = new Game(window.innerWidth,window.innerHeight);
-      Game.start();
-      setInterval(Game.render, 1000 / FPS);
-      
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      console.clear();
+      const FPS = 60;
+
+      // Frames API
+      window.requestAnimFrame = (function(){
+        return  window.requestAnimationFrame       ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame    ||
+                function( callback ){
+                  window.setTimeout(callback, 1000 / FPS);
+                };
+      })();
+
+      // Create new game fullscreen
+      Game = new Game(window.innerWidth,window.innerHeight,'po');
+      Game.pre();
     </script>
   </body>
 </html>
